@@ -1,7 +1,7 @@
 name: CI
-run-name: another-test
+run-name: new-test
 on: 
-  workflow_dispatch:
+  push: 
 env:
   APP_ENV: ci 
 jobs:
@@ -25,9 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with: 
           node-version: 22
+          cache: npm
       
       - name: Install Dependencies
-        run: npm install
+        run: npm ci 
 
       - name: Run Tests
         run: npm test
