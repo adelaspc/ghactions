@@ -1,13 +1,24 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: CI
+on: 
+  push:
+  pull_request:
 jobs:
-  check-bats-version:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install -g bats
-      - run: bats -v 
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 22
+      
+      - name: Install Dependencies
+        run: npm Install
+
+      - name: Run Tests
+        run: npm test
+
+  
